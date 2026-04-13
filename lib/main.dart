@@ -1,0 +1,102 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:nusapedia/presentation/localizations/bew_material_localizations.dart';
+import 'package:nusapedia/presentation/localizations/bjn_material_localizations.dart';
+import 'package:nusapedia/presentation/localizations/btm_material_localizations.dart';
+import 'package:nusapedia/presentation/localizations/gor_material_localizations.dart';
+import 'package:nusapedia/presentation/localizations/jv_material_localizations.dart';
+import 'package:nusapedia/presentation/localizations/mad_material_localizations.dart';
+import 'package:nusapedia/presentation/localizations/min_material_localizations.dart';
+import 'package:nusapedia/presentation/localizations/nia_material_localizations.dart';
+import 'package:nusapedia/presentation/localizations/su_material_localizations.dart';
+import 'core/theme_config.dart';
+import 'presentation/providers/theme_provider.dart';
+import 'presentation/providers/language_provider.dart';
+import 'presentation/providers/font_size_provider.dart';
+import 'presentation/providers/onboarding_provider.dart';
+import 'presentation/providers/shared_prefs_provider.dart';
+import 'presentation/pages/home_screen.dart';
+import 'presentation/pages/onboarding_screen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [
+        Locale('bew'),
+        Locale('bjn'),
+        Locale('btm'),
+        Locale('en'),
+        Locale('gor'),
+        Locale('id'),
+        Locale('jv'),
+        Locale('mad'),
+        Locale('min'),
+        Locale('ms'),
+        Locale('nia'),
+        Locale('su'),
+      ],
+      startLocale: const Locale('id'),
+      fallbackLocale: const Locale('nia'),
+      path: 'assets/translations',
+      child: ProviderScope(
+        overrides: [
+          sharedPreferencesProvider.overrideWithValue(prefs),
+        ],
+        child: const NusapediaApp(),
+      ),
+    ),
+  );
+}
+
+class NusapediaApp extends ConsumerWidget {
+  const NusapediaApp({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeProvider);
+    final hasCompletedOnboarding = ref.watch(onboardingProvider);
+    final fontSize = ref.watch(fontSizeProvider);
+    final selectedLanguage = ref.watch(languageProvider);
+
+    return MaterialApp(
+      title: 'Nusapedia',
+      theme: NusapediaThemeConfig.createTheme(selectedLanguage.seedColor, Brightness.light),
+      darkTheme: NusapediaThemeConfig.createTheme(selectedLanguage.seedColor, Brightness.dark),
+      themeMode: themeMode,
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: TextScaler.linear(fontSize.scale),
+          ),
+          child: child!,
+        );
+      },
+      localizationsDelegates: [
+        EasyLocalization.of(context)!.delegate,
+        const BewMaterialLocalizationsDelegate(),
+        const BjnMaterialLocalizationsDelegate(),
+        const BtmMaterialLocalizationsDelegate(),
+        const GorMaterialLocalizationsDelegate(),
+        const JvMaterialLocalizationsDelegate(),
+        const MadMaterialLocalizationsDelegate(),
+        const MinMaterialLocalizationsDelegate(),
+        const NiaMaterialLocalizationsDelegate(),
+        const SuMaterialLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      home: hasCompletedOnboarding ? const HomeScreen() : const OnboardingScreen(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
