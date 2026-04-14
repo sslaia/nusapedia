@@ -12,8 +12,8 @@ class WikiFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final String disclaimerUrl = 'https://nusapedia.blogspot.com/2026/04/disclaimer.html';
-    final String privacyPolicyUrl = 'https://nusapedia.blogspot.com/2026/04/nusapedia-privacy-policy.html';
+    final String disclaimerUrl = 'https://wikinusa.blogspot.com/2026/04/disclaimer.html';
+    final String privacyPolicyUrl = 'https://wikinusa.blogspot.com/2026/04/privacy-policy.html';
 
 
     return Container(

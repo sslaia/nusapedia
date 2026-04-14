@@ -31,7 +31,7 @@ sehingga anggota komunitas lain bisa juga menggunakannya <strong>kalau mau</stro
 Sementara Wikikamus fokus pada akses ke berbagai situs Wikikamus dalam bahasa daerah,
 aplikasi Nusapedia fokus pada akses ke berbagai situs Wikipedia di Indonesia.</p>
 
-<h3>Berbagai tulisan seputar kegiatan komunitas</h3>
+<h3>Berbagai tulisan saya seputar kegiatan komunitas</h3>
 <ol>
 <li><a href="https://nia.wikipedia.org/wiki/Sangoguna:Slaia/Introduksi_ke_program_bahasa_Nias_dalam_tiga_diagram">Program Pengembangan Bahasa Nias 2020-2025</a> (So yaŵa ba nga'örö zangoguna Slaia ba Wikikamus)</li>
 <li><a href="https://nia.wiktionary.org/wiki/Sangoguna:Slaia/Tantangan_mengembangkan_bahasa_Nias_di_Wikimedia">Tantangan mengembangkan bahasa Nias di Wikimedia</a> (So yaŵa ba nga'örö zangoguna Slaia ba Wikikamus)</li>
