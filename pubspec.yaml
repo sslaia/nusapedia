@@ -2,7 +2,7 @@ name: nusapedia
 description: "An Android app for Wikipedia in local languages in Indonesia"
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ^3.11.4
